@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Ticket Booking Info</title>
+</head>
+<style>
+    /* Reset and basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  header {
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .ticket-section {
+    margin: 50px 0;
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .ticket-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Ticket Card Style */
+  .ticket-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .ticket-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ticket-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .ticket-card h3 {
+    font-size: 22px;
+    margin-top: 20px;
+    color: #3498db;
+  }
+  
+  .ticket-card a {
+    display: inline-block;
+    margin: 20px;
+    padding: 12px 25px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ticket-card a:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .ticket-cards-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .ticket-cards-container {
+      grid-template-columns: 1fr;
+    }
+  
+    header h1 {
+      font-size: 28px;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    .ticket-card h3 {
+      font-size: 18px;
+    }
+  }
+  
+</style>
+<body>
+  <header>
+    <h1>Online Ticket Booking Info</h1>
+  </header>
+  
+  <!-- Travel Ticket Booking Section -->
+  <section class="ticket-section">
+    <h2>Travel Ticket Booking</h2>
+    <div class="ticket-cards-container">
+      <!-- Train -->
+      <div class="ticket-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuHxCkr7DpMIp3PYFb2pl9ak9QJ0e3jbxxIw&s" alt="Train">
+        <h3>Book Train Ticket</h3>
+        <a href="train.html">Book Now</a>
+      </div>
+      
+      <!-- Flight -->
+      <div class="ticket-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm5suGHDy2u_9p7bhG92owl6QJU8y8-sSPQA&s" alt="Flight">
+        <h3>Book Flight Ticket</h3>
+        <a href="flight.html">Book Now</a>
+      </div>
+
+      <!-- Bus -->
+      <div class="ticket-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThZHNYZZZYXZu8eR9rD0HaRrNExKbm-eS4EA&s" alt="Bus">
+        <h3>Book Bus Ticket</h3>
+        <a href="Bus.html">Book Now</a>
+      </div>
+
+      <!-- Movie -->
+      <div class="ticket-card">
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSCxk3f2Eesnn-1Ch9a7gOcIKo3b_nBBPF0KFAKBP_OJxS5PvZM" alt="Movie">
+        <h3>Book Movie Ticket</h3>
+        <a href="Movie.html">Book Now</a>
+      </div>
+
+      <!-- Food -->
+      <div class="ticket-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUCTIDwpkd6Ew4QWM-AbjcvQxm-Xg-GnpfzC5AGg_WwUaTS8F7VcvWDN2gdz7t3AVp5kA&usqp=CAU" alt="Food">
+        <h3>Book Your Fav Food</h3>
+        <a href="food.html">Book Now</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

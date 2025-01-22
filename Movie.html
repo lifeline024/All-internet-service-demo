@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #ff2e63;
+            color: #fff;
+            padding: 1.5em 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: bold;
+            
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2em auto;
+            background: #fff;
+            padding: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 2.5em;
+        }
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 1em;
+            color: #ff2e63;
+            border-left: 5px solid #ff2e63;
+            padding-left: 0.5em;
+        }
+        .movie-cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 0;
+            scrollbar-width: thin; /* For Firefox */
+            -ms-overflow-style: none;  /* For IE */
+        }
+        
+        .movie-cards::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Webkit browsers (Chrome, Safari, etc.) */
+        }
+        
+        .movie-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0;  /* Prevent cards from shrinking */
+        }
+        
+        .movie-card img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .movie-card h3 {
+            font-size: 1.2em;
+            padding: 0.8em 0;
+            margin: 0;
+            background-color: #ff2e63;
+            color: #fff;
+        }
+        button {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.6em 1.2em;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff2e63;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #e82657;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Movie Ticket Booking</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5em 1em;">
+            <!-- Search Bar -->
+            <div style="flex: 1; margin-right: 1em;">
+                <input 
+                    type="text" 
+                    placeholder="Search for movies or actors..." 
+                    style="width: 100%; padding: 0.5em; border: 1px solid #ddd; border-radius: 4px; font-size: 1em;"
+                />
+            </div>
+            
+            <!-- Dropdown Menu for Categories -->
+            <div>
+                <select id="movie-category"
+                    style="padding: 0.5em; border: 1px solid #ddd; border-radius: 4px; font-size: 1em;">
+                    <option value="all">All Categories</option>
+                    <option value="upcoming">Upcoming Movies</option>
+                    <option value="new-releases">New Releases</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="romantic">Romantic Movies</option>
+                </select>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="section" id="upcoming">
+            <h2 class="section-title">Upcoming Movies</h2>
+            <div class="movie-cards">
+                <div class="movie-card" onclick="openMoviePage('deva.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScxGv9ux3IJcFEF3pQWoNpPduNkYbVeG72WQ&s" alt="Deva">
+                    <h3>Deva</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('skyforce.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRobpAXjDub1m7neipmyhvAGtjToZwJijYksBPbYBlXngRIdJdSRbTXSXqXcxvYEu_YMgZg2Sun8-5JUlSyRgY0786TURdWkKTPZSjQTw" alt="Sky force">
+                    <h3>Sky force</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('mission.html')">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZmE2NGNiZTMtODE4YS00Y2ZmLTg1ZTgtMzZmYTA0ZmI2NDY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Mission Gery House">
+                    <h3>Mission Gery House</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('emergency.html')">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/3/32/Emergency_movie_poster.jpg" alt="Emergency">
+                    <h3>Emergency</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('azaad.html')">
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRKufWEsQ13PyHsYay_E4yHcq8r11no3izxiDk9vAS_dMMN7ruEfCgU6GNx5WTFna4fKvvL" alt="Azaad">
+                    <h3>Azaad</h3>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="new-releases">
+            <h2 class="section-title">New Releases</h2>
+            <div class="movie-cards">
+                <div class="movie-card" onclick="openMoviePage('gamechanger.html')">
+                    <img src="https://i.ytimg.com/vi/OXe7N7-xMKM/maxresdefault.jpg" alt="Game changer">
+                    <h3>Game Changer</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('pushpa.html')">
+                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ5pnelFSPBDJ7ldUij8PyeHhP-otw9tde8PaAey2lkfvq5dKgvGWkKdM0q-HaOyLCRkvHo" alt="Pushpa 2: The Rule">
+                    <h3>Pushpa 2: The Rule</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('john.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr26lfwU6u-FThjrtpNhHqvY1LQwX5MtezF1veUjXM_OKZWqbE9qtMLLEcvtB3UBq0JoFa" alt="Baby John">
+                    <h3>Baby John</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('luckybhaskar.html')">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQcnmoPcSCRQbl68wnvmDtrLAPRBJUaPWHxPm9o4omBi4ciaC96" alt="Lucky Bhaskar">
+                    <h3>Lucky Bhaskar</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('bagheera.html')">
+                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSGW3doBb5vgGuixTTd5yy4HAbtFCxUUHaqcmRMpYIpaTNIEUin" alt="Bagheera">
+                    <h3>Bagheera</h3>
+                </div>
+                <!-- <div class="movie-card" onclick="openMoviePage('.html')">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRweoHsX7wEqp6H5Kn_oR_4Xh4y88YzH60tehjsJ_02_Xti0cTAx5EXw9C3hzP1Aqgjqfs" alt="Movie 6">
+                    <h3>Movie 6</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('.html')">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTIn6DT5J_1uXXhfjl9LQnZFtFi9rBaHmps9G9VZGlXrZnApqa1j27NO3z-qVeb8nq0Pcg" alt="Movie 7">
+                    <h3>Movie 7</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('.html')">
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOUQF7b_AqC99jPqM1DIk9z9dU8ZFV8WUnzvLC04f6oPS92p7guQEKFhJh0MFyq5G-Tno" alt="Movie 8">
+                    <h3>Movie 8</h3>
+                </div> -->
+            </div>
+            
+        </div>
+        <div class="section" id="sci-fi">
+            <h2 class="section-title">Sci-Fi Movies</h2>
+            <div class="movie-cards">
+                <div class="movie-card" onclick="openMoviePage('kalki.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8HwiJhlu3oXzN77FHgO5wbKz_0qTvZeVTYw&s" alt="Kalki 2898 AD">
+                    <h3>Kalki 2898 AD</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('dobaara.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7NKGti9M0_Nf1sdb6Fl5QhXvAnqF6f00X0w&s" alt="Dobaara">
+                    <h3>Dobaara</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('maayavan.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJe6mTsP4scqtEjtX1QZV_BgrGhl5xXizjXA&s" alt="Maayavan">
+                    <h3>Maayavan</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('24.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2W1mHbUowx6ZmaaCogjp47EChBjDGfxur2A&s" alt="24 (Time Story)">
+                    <h3>24 (Time Story)</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('raone.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcaS9ECMpJEFjJWB03F71ezlUARR_5YdcbtQ&s" alt="Ra.One">
+                    <h3>Ra.One</h3>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="romantic">
+            <h2 class="section-title">Romantic Movie</h2>
+            <div class="movie-cards">
+                <div class="movie-card" onclick="openMoviePage('sanam.html')">
+                    <img src="https://m.media-amazon.com/images/M/MV5BOWZkZjhjNzktMWY5NC00NGI0LTk1OWItZGIwNDk5MDZhYWExXkEyXkFqcGc@._V1_.jpg" alt="Sanam Teri Kasam">
+                    <h3>Sanam Teri Kasam</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('marjaavaan.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThE65VkmLmxg8oo7hR0ErLMqod4gDOLFdhEA&s" alt="Marjaavaan">
+                    <h3>Marjaavaan</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('dilbechera.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTidf95nnqARa6wh_FEywxpvojsL3hNdEObRA&s" alt="Dil Bechara">
+                    <h3>Dil Bechara</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('halfgf.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyLX9jjCfiinJTVvB3pQpmI58Zx-Zs_A78cqmQsLWaz1VTwC4fok7KJNF-J5xsUpU0Ps&usqp=CAU" alt="Half Girlfriend">
+                    <h3>Half Girlfriend</h3>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('sitaram.html')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdnQlFh2I_jrDSJgeOqR0nxgnAuGBcxgSg3lRkH99cpvz0T_ISpSdBRz_gth-1aEln2ZY&usqp=CAU" alt="Sita Ramam">
+                    <h3>Sita Ramam</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openMoviePage(url) {
+            window.location.href = url;
+        }
+
+        function openLoginPage() {
+            window.location.href = 'login.html';
+        }
+
+        // Movie - catogery 
+        document.getElementById('movie-category').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var section = document.getElementById(selectedValue);
+        
+            if (section) {
+                // Scroll to the selected section
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
+    </script>
+</body>
+</html>

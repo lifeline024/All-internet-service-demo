@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sita Ramam Tickets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+        
+        .movie-details {
+            display: flex;
+            padding: 2em;
+            background-color: #fff;
+            margin: 2em auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .movie-details img {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 2em;
+        }
+        
+        .details h2, .details h3 {
+            margin-top: 0;
+        }
+        
+        button#bookTicketBtn {
+            background-color: #ff5733;
+            color: #fff;
+            border: none;
+            padding: 1em 2em;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 1em;
+        }
+        
+        button#bookTicketBtn:hover {
+            background-color: #e14e2b;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            padding: 2em;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 1em;
+            top: 0.5em;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .seats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1em;
+        }
+        
+        .seat {
+            width: 40px;
+            height: 40px;
+            background-color: #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .seat.occupied {
+            background-color: #ff4d4d;
+            cursor: not-allowed;
+        }
+        
+        .seat.selected {
+            background-color: #4caf50;
+        }
+        
+        .summary {
+            margin-top: 1em;
+        }
+        
+        .book-button {
+            background-color: #ff5733;
+            color: #fff;
+            border: none;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 1em;
+        }
+        
+        .book-button:hover {
+            background-color: #e14e2b;
+        }
+        
+        /* for phone view */
+@media (max-width: 768px) {
+    header {
+        padding: 1em;
+        font-size: 1.5em;
+    }
+
+    .movie-details {
+        flex-direction: column;
+        padding: 1em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+
+    .movie-details img {
+        width: 100%;
+        height: auto;
+        margin: 0 0 1em 0;
+    }
+
+    .details h2, .details h3 {
+        font-size: 1.2em;
+    }
+
+    .details p {
+        font-size: 1em;
+    }
+
+    button#bookTicketBtn {
+        width: 100%;
+        padding: 0.8em;
+        font-size: 1em;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 1em;
+        margin: 15% auto;
+        font-size: 0.9em;
+    }
+
+    .close {
+        font-size: 1.5em;
+        top: 0.3em;
+        right: 0.8em;
+    }
+
+    .show-timings h3, 
+    .seat-selection h3, 
+    .summary p {
+        font-size: 1em;
+    }
+
+    .seats {
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .seat {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8em;
+    }
+
+    .book-button {
+        width: 100%;
+        font-size: 1em;
+        padding: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 1.2em;
+    }
+
+    .movie-details {
+        padding: 0.8em;
+    }
+
+    button#bookTicketBtn, .book-button {
+        padding: 0.6em;
+        font-size: 0.9em;
+    }
+
+    .modal-content {
+        padding: 1em;
+    }
+
+    .seat {
+        width: 30px;
+        height: 30px;
+        font-size: 0.7em;
+    }
+
+    .details h2, .details h3 {
+        font-size: 1em;
+    }
+
+    .details p {
+        font-size: 0.9em;
+    }
+
+    .show-timings h3, 
+    .seat-selection h3, 
+    .summary p {
+        font-size: 0.9em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sita Ramamr</h1>
+    </header>
+    <main>
+        <section class="movie-details">
+            <div class="movie-poster">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdnQlFh2I_jrDSJgeOqR0nxgnAuGBcxgSg3lRkH99cpvz0T_ISpSdBRz_gth-1aEln2ZY&usqp=CAU" alt="Sita Ramam Movie Poster">
+            </div>
+            <div class="details">
+                <h1>Sita Ramam</h1>
+                <h2>Synopsis</h2>
+                <p>"Sita Ramam" is a heartwarming romantic drama that unfolds against the backdrop of the Indian Army. The story follows Lieutenant Ram, who receives a letter from Sita, a woman he has never met, and the two develop a deep bond. The film explores love, duty, sacrifice, and the emotional journey that brings them together across time and space.</p>
+                <h3>Cast</h3>
+                <p>Dulquer Salmaan, Mrunal Thakur, Rashmika Mandanna, Sumanth, and others.</p>
+                <h3>Duration</h3>
+                <p>2 hours 30 minutes</p>
+                <h3>Genre</h3>
+                <p>Romance, Drama, War</p>
+                <h3>Language</h3>
+                <p>Telugu, Hindi, Tamil</p>
+                <h3>Release Date</h3>
+                <p>August 5, 2022</p>
+                <button id="bookTicketBtn">Book Your Ticket</button>
+            </div>            
+        </section>
+    </main>
+    
+
+    <!-- Modal Structure -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book Your Tickets</h2>
+            <div class="show-timings">
+                <h3>Select Show Timing</h3>
+                <select id="showTiming">
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="1:00 PM">1:00 PM</option>
+                    <option value="4:00 PM">4:00 PM</option>
+                    <option value="7:00 PM">7:00 PM</option>
+                </select>
+            </div>
+            <div class="seat-selection">
+                <h3>Select Your Seats</h3>
+                <div class="seats">
+                    <div class="seat" data-seat-number="1">1</div>
+                    <div class="seat occupied" data-seat-number="2">2</div>
+                    <div class="seat" data-seat-number="3">3</div>
+                    <div class="seat" data-seat-number="4">4</div>
+                    <div class="seat" data-seat-number="5">5</div>
+                    <div class="seat occupied" data-seat-number="6">6</div>
+                    <div class="seat" data-seat-number="7">7</div>
+                    <div class="seat" data-seat-number="8">8</div>
+                    <div class="seat" data-seat-number="9">9</div>
+                    <div class="seat occupied" data-seat-number="10">10</div>
+                    <div class="seat" data-seat-number="11">11</div>
+                    <div class="seat" data-seat-number="12">12</div>
+                    <div class="seat occupied" data-seat-number="13">13</div>
+                    <div class="seat" data-seat-number="14">14</div>
+                    <div class="seat" data-seat-number="15">15</div>
+                    <div class="seat occupied" data-seat-number="16">16</div>
+                    <div class="seat" data-seat-number="17">17</div>
+                    <div class="seat" data-seat-number="18">18</div>
+                    <div class="seat occupied" data-seat-number="19">19</div>
+                    <div class="seat" data-seat-number="20">20</div>
+                    <div class="seat" data-seat-number="21">21</div>
+                    <div class="seat occupied" data-seat-number="22">22</div>
+                    <div class="seat" data-seat-number="23">23</div>
+                    <div class="seat" data-seat-number="24">24</div>
+                    <div class="seat occupied" data-seat-number="25">25</div>
+                    <div class="seat" data-seat-number="26">26</div>
+                    <div class="seat" data-seat-number="27">27</div>
+                    <div class="seat occupied" data-seat-number="28">28</div>
+                    <div class="seat" data-seat-number="29">29</div>
+                    <div class="seat" data-seat-number="30">30</div>
+                    <div class="seat occupied" data-seat-number="31">31</div>
+                    <div class="seat" data-seat-number="32">32</div>
+                    <div class="seat" data-seat-number="33">33</div>
+                    <div class="seat occupied" data-seat-number="34">34</div>
+                    <div class="seat" data-seat-number="35">35</div>
+                    <div class="seat" data-seat-number="36">36</div>
+                    <div class="seat occupied" data-seat-number="37">37</div>
+                    <div class="seat" data-seat-number="38">38</div>
+                    <div class="seat" data-seat-number="39">39</div>
+                    <div class="seat occupied" data-seat-number="40">40</div>
+                    <div class="seat" data-seat-number="41">41</div>
+                    <div class="seat occupied" data-seat-number="42">42</div>
+                    <div class="seat" data-seat-number="43">43</div>
+                    <div class="seat" data-seat-number="44">44</div>
+                    <div class="seat" data-seat-number="45">45</div>
+                    <div class="seat occupied" data-seat-number="46">46</div>
+                    <div class="seat" data-seat-number="47">47</div>
+                    <div class="seat" data-seat-number="48">48</div>
+                    <div class="seat" data-seat-number="49">49</div>
+                    <div class="seat occupied" data-seat-number="50">50</div>
+                    <div class="seat" data-seat-number="51">51</div>
+                    <div class="seat" data-seat-number="52">52</div>
+                    <div class="seat occupied" data-seat-number="53">53</div>
+                    <div class="seat" data-seat-number="54">54</div>
+                    <div class="seat" data-seat-number="55">55</div>
+                    <div class="seat occupied" data-seat-number="56">56</div>
+                    <div class="seat" data-seat-number="57">57</div>
+                    <div class="seat" data-seat-number="58">58</div>
+                    <div class="seat occupied" data-seat-number="59">59</div>
+                    <div class="seat" data-seat-number="60">60</div>
+                    <div class="seat" data-seat-number="61">61</div>
+                    <div class="seat occupied" data-seat-number="62">62</div>
+                    <div class="seat" data-seat-number="63">63</div>
+                    <div class="seat" data-seat-number="64">64</div>
+                    <div class="seat occupied" data-seat-number="65">65</div>
+                    <div class="seat" data-seat-number="66">66</div>
+                    <div class="seat" data-seat-number="67">67</div>
+                    <div class="seat occupied" data-seat-number="68">68</div>
+                    <div class="seat" data-seat-number="69">69</div>
+                    <div class="seat" data-seat-number="70">70</div>
+                    <div class="seat occupied" data-seat-number="71">71</div>
+                    <div class="seat" data-seat-number="72">72</div>
+                    <div class="seat" data-seat-number="73">73</div>
+                    <div class="seat occupied" data-seat-number="74">74</div>
+                    <div class="seat" data-seat-number="75">75</div>
+                    <div class="seat" data-seat-number="76">76</div>
+                    <div class="seat occupied" data-seat-number="77">77</div>
+                    <div class="seat" data-seat-number="78">78</div>
+                    <div class="seat" data-seat-number="79">79</div>
+                    <div class="seat occupied" data-seat-number="80">80</div>
+                </div>
+            </div>
+            <div class="summary">
+                <p><strong>Selected Seats:</strong> <span id="selectedSeats">None</span></p>
+                <p><strong>Total Price:</strong> ₹<span id="totalPrice">0</span></p>
+                <button class="book-button" id="confirmBookingBtn">Confirm Booking</button>
+            </div>            
+        </div>
+    </div>
+
+    <script>
+        // Open booking modal
+        document.getElementById('bookTicketBtn').addEventListener('click', () => {
+            document.getElementById('bookingModal').style.display = 'flex';
+        });
+
+        // Close booking modal
+        document.querySelector('.close').addEventListener('click', closeBookingModal);
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        const seats = document.querySelectorAll('.seat:not(.occupied)');
+        let selectedSeats = [];
+        const seatPrice = 180;
+
+        // Handle seat selection
+        seats.forEach(seat => {
+            seat.addEventListener('click', () => {
+                seat.classList.toggle('selected');
+                const seatNumber = seat.textContent;
+
+                if (seat.classList.contains('selected')) {
+                    selectedSeats.push(seatNumber);
+                } else {
+                    selectedSeats = selectedSeats.filter(num => num !== seatNumber);
+                }
+
+                updateSummary();
+            });
+        });
+
+        // Update summary
+        function updateSummary() {
+            document.getElementById('selectedSeats').textContent = selectedSeats.length ? selectedSeats.join(', ') : 'None';
+            document.getElementById('totalPrice').textContent = (selectedSeats.length * seatPrice).toFixed(2);
+        }
+
+        // Finalize booking
+        document.getElementById('confirmBookingBtn').addEventListener('click', finalizeBooking);
+
+        function finalizeBooking() {
+            if (selectedSeats.length === 0) {
+                alert('Please select at least one seat!');
+                return;
+            }
+            alert('Your tickets have been booked successfully!');
+            closeBookingModal();
+        }
+    </script>
+</body>
+</html>

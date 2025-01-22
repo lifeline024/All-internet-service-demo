@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Recharge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+
+        .confirmation {
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+
+        /* Payment Modal */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .payment-modal-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .payment-modal h2 {
+            color: #007bff;
+        }
+
+        .payment-modal button {
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            padding: 12px;
+            border-radius: 6px;
+            border: none;
+            width: 100%;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .payment-modal button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .payment-option.selected {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .payment-option img {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .payment-option span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Close Button */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: #007bff;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }    </style>
+</head>
+<body>
+    <header>
+        <h1>Mobile Recharge</h1>
+    </header>
+    <div class="container">
+        <h2>Recharge Your Number</h2>
+        <form id="rechargeForm">
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="text" id="mobileNumber" placeholder="Enter your mobile number" required>
+            </div>
+            <div class="form-group">
+                <label for="operator">Select Operator</label>
+                <select id="operator" required>
+                    <option value="">--Select Operator--</option>
+                    <option value="Airtel">Airtel</option>
+                    <option value="Jio">Jio</option>
+                    <option value="Vi">Vi</option>
+                    <option value="BSNL">BSNL</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="state">Select State</label>
+                <select id="state" required>
+                    <option value="">--Select State--</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Puducherry">Puducherry</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Enter Amount</label>
+                <input type="number" id="amount" placeholder="Enter recharge amount" required>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="processRecharge()">Recharge Now</button>
+            </div>
+        </form>
+        <div class="confirmation" id="confirmationMessage">
+            Recharge successful! Thank you for using our service.
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-modal-content">
+            <h2>Choose Payment Method</h2>
+            <div class="payment-option" data-method="card">
+                <img src="https://www.iconfinder.com/data/icons/payment-methods/100/credit_card_payment_card-512.png" alt="Credit/Debit Card">
+                <span>Credit/Debit Card</span>
+            </div>
+            <div class="payment-option" data-method="upi">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/UPI_logo.svg" alt="UPI">
+                <span>UPI (Unified Payments Interface)</span>
+            </div>
+            <div class="payment-option" data-method="payMan">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/PayPal_logo_2014.svg" alt="PayMan">
+                <span>PayMan</span>
+            </div>
+            <button id="proceedButton">Proceed with Payment</button>
+        </div>
+    </div>
+
+    <script>
+        function processRecharge() {
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const operator = document.getElementById('operator').value;
+            const amount = document.getElementById('amount').value;
+            const state = document.getElementById('state').value;
+
+            if (!mobileNumber || !operator || !amount || !state) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Show payment modal
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        // Select payment option
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Proceed with payment
+        document.getElementById('proceedButton').addEventListener('click', function() {
+            alert('Recharge successful!');
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('confirmationMessage').style.display = 'block';
+        });
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('paymentModal')) {
+                document.getElementById('paymentModal').style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

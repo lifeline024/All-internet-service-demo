@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Service Hub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    /* Header Styling */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #2c3e50;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      width: 100%;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    header a:hover {
+      color: #3498db;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      background: url('all service.png') no-repeat center center/cover;
+      color: white;
+      padding: 150px 20px 80px;
+      margin-top: 60px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: lightsalmon;
+      text-shadow: 5px 5px 7px rgba(0, 0, 0, 0.7), 
+               -2px -2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero h3 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: yellow;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), 
+      -2px -2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero button {
+      padding: 15px 25px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Service Section */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 80px 20px;
+      background-color: #ecf0f1;
+      margin-top: 20px;
+    }
+
+    .service-card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 150px;  /* Adjust the height according to your preference */
+      object-fit: cover;  /* Ensures the image covers the space without distorting */
+      border-radius: 10px; /* Optional, for rounded corners */
+    }
+    
+
+    .service-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #7f8c8d;
+    }
+
+    .service-card a {
+      padding: 12px 25px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .service-card a:hover {
+      background-color: #2980b9;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #3498db;
+    }
+
+    footer input[type="email"] {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      width: 300px;
+    }
+
+    footer button {
+      padding: 12px 25px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    footer button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      font-size: 20px;
+    }
+
+    .scroll-to-top:hover {
+      background-color: #2980b9;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 1024px) {
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 20px;
+      }
+
+      .services {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      footer input[type="email"] {
+        width: 250px;
+      }
+
+      footer button {
+        width: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      footer input[type="email"] {
+        width: 200px;
+      }
+
+      footer button {
+        width: 200px;
+      }
+    }
+
+    /* Small Screen (Mobile) */
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+
+      header a {
+        margin: 5px 0;
+      }
+
+      .hero {
+        padding: 120px 20px 50px;
+      }
+
+      .service-card h3 {
+        font-size: 18px;
+      }
+
+      .service-card p {
+        font-size: 14px;
+      }
+
+      .service-card a {
+        padding: 10px 20px;
+        font-size: 12px;
+      }
+
+      footer input[type="email"] {
+        width: 180px;
+      }
+
+      footer button {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><strong>My Service Hub</strong></div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Welcome to My Service Hub</h1>
+  <h3>Your one-stop solution for all your online service needs.</h3>
+  <a href="#services"><button>Explore Services</button></a>
+</section>
+
+<section class="services">
+  <div class="service-card">
+    <img src="https://img.icons8.com/?size=100&id=111171&format=png&color=000000" alt="Ticket Booking">
+    <h3>Booking Services</h3>
+    <p>Book your Journey(Bus, Train, Flight), Movie.</p>
+    <a href="booking.html">Start Booking</a>
+  </div>
+  <div class="service-card">
+    <img src="learningpoint.png" alt="Online Education">
+    <h3>LearningPoint</h3>
+    <p>Learn anything, anywhere with your learning hub.</p>
+    <a href="https://learningpoint.vercel.app/">Start Learning</a>
+  </div>
+  <div class="service-card">
+    <img src="payman app.png" alt="Payment Services">
+    <h3>PayMan</h3>
+    <p>Manage and transfer money easily.</p>
+    <a href="pay.html">Get Started</a>
+  </div>
+  <div class="service-card">
+    <img src="https://img.icons8.com/?size=100&id=Hd59k5Lj4L8Y&format=png&color=000000" alt="Streaming Services">
+    <h3>viewflix</h3>
+    <p>Watch your favourite movies & Series.</p>
+    <a href="https://viewflix-ten.vercel.app/">Explore</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 My Service Hub | All rights reserved</p>
+  <input type="email" placeholder="Subscribe for updates...">
+  <button>Subscribe</button>
+</footer>
+
+<button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">&#8679;</button>
+
+<script>
+  window.onscroll = function() {
+    var scrollButton = document.querySelector('.scroll-to-top');
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollButton.style.display = "block";
+    } else {
+      scrollButton.style.display = "none";
+    }
+  };
+</script>
+
+</body>
+</html>

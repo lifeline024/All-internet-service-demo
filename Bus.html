@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking System</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .form-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .form-section input,
+        .form-section select,
+        .form-section button {
+            width: 95%; /* Reduced size */
+            padding: 10px; /* Smaller padding */
+            margin-bottom: 10px; /* Reduced margin */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95rem; /* Reduced font size */
+            outline: none;
+        }
+
+        .form-section button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem; /* Slightly reduced button text size */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .form-section button:hover {
+            background-color: #1e7b34;
+            transform: scale(1.05);
+        }
+
+        .form-section input:focus,
+        .form-section select:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .form-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .form-section input,
+            .form-section select,
+            .form-section button {
+                font-size: 0.85rem; /* Smaller font size for mobile */
+            }
+        }
+
+         /* Payment Modal */
+         .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .payment-modal-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .payment-modal h2 {
+            color: #007bff;
+        }
+
+        .payment-modal button {
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            padding: 12px;
+            border-radius: 6px;
+            border: none;
+            width: 100%;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .payment-modal button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .payment-option.selected {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .payment-option img {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .payment-option span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Close Button */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: #007bff;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚌 Bus Ticket Booking System</h1>
+    </header>
+    <div class="container">
+        <!-- Bus Search Section -->
+        <div class="form-section">
+            <h2>🔍 Search Buses</h2>
+            <input type="text" placeholder="From (City Name or Code)" required>
+            <input type="text" placeholder="To (City Name or Code)" required>
+            <input type="date" required>
+            <div class="tooltip">
+                <button>Search Buses</button>
+                <span class="tooltiptext">Find buses for your journey</span>
+            </div>
+        </div>
+        
+        <!-- Booking Status Section -->
+        <div class="form-section">
+            <h2>📝 Check Booking Status</h2>
+            <input type="text" placeholder="Enter Booking ID" required>
+            <div class="tooltip">
+                <button>Check Status</button>
+                <span class="tooltiptext">View your ticket booking status</span>
+            </div>
+        </div>
+        
+        <!-- Live Bus Tracking Section -->
+        <div class="form-section">
+            <h2>📍 Live Bus Tracking</h2>
+            <input type="text" placeholder="Enter Bus Number" required>
+            <div class="tooltip">
+                <button>Track Bus</button>
+                <span class="tooltiptext">Track your bus in real-time</span>
+            </div>
+        </div>
+        
+        <!-- Ticket Booking Section -->
+        <div class="form-section">
+            <h2>🎫 Book Tickets</h2>
+            <input type="text" placeholder="Passenger Name" required>
+            <select>
+                <option>Select Bus Type</option>
+                <option>AC Sleeper</option>
+                <option>Non-AC Sleeper</option>
+                <option>AC Seater</option>
+                <option>Non-AC Seater</option>
+            </select>
+            <input type="number" placeholder="Number of Passengers" required>
+            <button id="bookTicketButton" class="tooltip">Book Now</button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-modal-content">
+            <h2>💳 Choose Payment Method</h2>
+            <div class="payment-option" data-method="card">
+                <img src="https://img.icons8.com/?size=100&id=3EFzPFftonWA&format=png&color=000000" alt="Credit/Debit Card">
+                <span>Credit/Debit Card</span>
+            </div>
+            <div class="payment-option" data-method="upi">
+                <img src="https://img.icons8.com/?size=100&id=112309&format=png&color=000000" alt="UPI">
+                <span>UPI (Unified Payments Interface)</span>
+            </div>
+            <div class="payment-option" data-method="Wallet">
+                <img src="https://img.icons8.com/?size=100&id=47454&format=png&color=000000" alt="Wallet">
+                <span>Wallet</span>
+            </div>
+            <button id="proceedButton" disabled>Proceed with Payment</button>
+        </div>
+    </div>
+
+    <script>
+        // Show payment modal when Book Now is clicked
+        document.getElementById('bookTicketButton').addEventListener('click', function() {
+            document.getElementById('paymentModal').style.display = 'flex';
+        });
+
+
+        // Close the modal if clicked outside of the modal content
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('paymentModal')) {
+                document.getElementById('paymentModal').style.display = 'none';
+            }
+        };
+
+        // Select payment option and enable "Proceed with Payment"
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('proceedButton').disabled = false;
+            });
+        });
+
+        // Simulate booking process
+        document.getElementById('proceedButton').addEventListener('click', function() {
+            alert("Ticket booked successfully!");
+            document.getElementById('paymentModal').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
